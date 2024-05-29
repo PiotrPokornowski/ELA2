@@ -1,0 +1,33 @@
+* C:\Studia\ELA2\Projekt\LTSpice\Digital\buck.asc
+C1 N001 0 1µ Rser=5m Lser=0.2n
+V1 IN 0 10 Rser=100m
+L1 N003 OUT flux={3.3u*13.5A}*tanh(x/{13.5A}) Rser=0.0075
+C3 N002 N003 .1µ Rser=30m Lser=0.2n
+R2 OUT N005 1Meg
+R3 N005 0 243k
+C5 OUT N005 4.7p Rser=2m Lser=0.2n
+C6 IN 0 6.88µ Rser=2.5m Lser=0.3n
+C7 IN 0 1.03µ Rser=6m Lser=0.6n
+C8 IN 0 1.03µ Rser=6m Lser=0.6n
+C2 N004 0 10n Rser=250m Lser=0.3n
+XU1 OUT N001 N002 IN IN 0 IN N003 N006 0 N004 0 0 N005 0 LT8640
+I1 OUT 0 5 load
+R1 N006 0 41.2k
+C10 OUT 0 43.6µ Rser=350m Lser=3n
+C4 OUT 0 43.6µ Rser=350m Lser=3n
+C9 OUT 0 1.27µ Rser=5m Lser=0.6n
+.tran 8m startup
+.meas Pin AVG -V(IN)*I(V1) FROM 7m
+.meas Pout AVG V(OUT)*I(I1) FROM 7m
+.meas Eff param (Pout/Pin)*100 FROM 7m
+.meas Vout_avg AVG V(OUT) FROM 7m
+.meas Vout_pp PP V(OUT)*1000 FROM 7m
+.meas Vin_pp PP V(IN)*1000 FROM 7m
+* 10u
+* 47u
+* 1.5u
+* 1.5u
+* 1.5u
+.lib LT8640.sub
+.backanno
+.end
