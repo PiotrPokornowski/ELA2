@@ -52,7 +52,7 @@ Zaprojektowana przetwornica obniża napięcie z \SI{10}{\V} do \SI{5}{\V} i dzia
     \centering
     \begin{adjustbox}{width=1.1\textwidth,center}
         \subfloat[Schemat układu]{
-            \includegraphics[width=\textwidth]{figures/digital/schematic.png}
+            \includegraphics[width=\textwidth]{./figures/digital/digital.png}
             \label{fig:subfig1}
         }
         \qquad
@@ -72,8 +72,8 @@ Zaprojektowana przetwornica obniża napięcie z \SI{10}{\V} do \SI{5}{\V} i dzia
                         tick label style={font=\tiny},
                         title={\SI{5}{\V} / \SI{5}{\A}},
                     ]
-                    \addplot[color=green] table {../LTSpice/Digital/traces/vout/segment_1.csv};
-                    \addplot[color=green] table {../LTSpice/Digital/traces/vout/segment_2.csv};
+                    \addplot[color=green] table {./figures/digital/vout/segment_1.csv};
+                    \addplot[color=green] table {./figures/digital/vout/segment_1.csv};
                     \label{plot:vout} % Label for vout plot
                 \end{axis}
 
@@ -89,8 +89,8 @@ Zaprojektowana przetwornica obniża napięcie z \SI{10}{\V} do \SI{5}{\V} i dzia
                         ylabel={$I_{\text{OUT}}$},
                         tick label style={font=\tiny},
                     ]
-                    \addplot[color=red] table {../LTSpice/Digital/traces/iout/segment_1.csv};
-                    \addplot[color=red] table {../LTSpice/Digital/traces/iout/segment_2.csv};
+                    \addplot[color=red] table {./figures/digital/iout/segment_1.csv};
+                    \addplot[color=red] table {./figures/digital/iout/segment_2.csv};
                     \label{plot:current} % Label for current plot
                 \end{axis}
             \end{tikzpicture}

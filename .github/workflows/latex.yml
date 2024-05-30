@@ -8,11 +8,11 @@ jobs:
         uses: actions/checkout@v4
       - uses: xu-cheng/latex-action@v3
         with:
-          root_file: Sprawozdanie.tex
+          root_file: Projekt/docs/Sprawozdanie.tex
           latexmk_shell_escape: true
           latexmk_use_lualatex: true
         env:
-          TEXINPUTS: TEXINPUTS=Projekt/docs/:Projekt/docs/sections/:Projekt/docs/figures/
+          TEXINPUTS: .:Projekt/docs/:Projekt/docs/sections/:Projekt/docs/figures/
       - name: Upload PDF file
         uses: actions/upload-artifact@v4
         with:
