@@ -20,4 +20,5 @@
 *.txt
 *.auxlock
 *.pdf
+*.test
 .venv/

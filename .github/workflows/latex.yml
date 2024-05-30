@@ -12,7 +12,6 @@ jobs:
           latexmk_use_lualatex: true
           continue_on_error: true
           texlive_version: 2024
-          pre_compile: "tlmgr update --self && tlmgr update --all"
           working_directory: Projekt/docs
           root_file: Sprawozdanie.tex      
         env:
