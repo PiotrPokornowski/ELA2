@@ -21,8 +21,8 @@
 \usepackage{pdfpages}
 
 \pgfplotsset{compat=newest}
-%\usepgfplotslibrary{external}
-%\tikzexternalize[prefix=tikz/]
+\usepgfplotslibrary{external}
+\tikzexternalize[prefix=tikz/]
 
 \title{ELA2 - Projekt}
 \author{Piotr Pokornowski 325061}
@@ -72,7 +72,7 @@ Zaprojektowana przetwornica obniża napięcie z \SI{10}{\V} do \SI{5}{\V} i dzia
                         title={\SI{5}{\V} / \SI{5}{\A}},
                     ]
                     \addplot[color=green] table {./figures/digital/vout/segment_1.csv};
-                    \addplot[color=green] table {./figures/digital/vout/segment_1.csv};
+                    \addplot[color=green] table {./figures/digital/vout/segment_2.csv};
                     \label{plot:vout} % Label for vout plot
                 \end{axis}
 
@@ -82,6 +82,8 @@ Zaprojektowana przetwornica obniża napięcie z \SI{10}{\V} do \SI{5}{\V} i dzia
                         axis x line=none,
                         ymin=-1,
                         ymax=6,
+                        xmin=0,
+                        xmax=0.008,
                         ytick pos=right,
                         yticklabel pos=right,
                         ytick distance=1,
