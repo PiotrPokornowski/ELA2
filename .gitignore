@@ -2,6 +2,7 @@
 *.aux
 *.log
 *.synctex.gz
+*.synctex\(busy\)
 *.dvi
 *.fdb_latexmk
 *.fls
@@ -17,4 +18,6 @@
 *.dpth
 *.raw
 *.txt
+*.auxlock
+*.pdf
 .venv/
