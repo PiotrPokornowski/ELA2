@@ -6,6 +6,8 @@ jobs:
     steps:
       - name: Set up Git repository
         uses: actions/checkout@v4
+      - name: setup
+        run: mkdir Projekt/docs/tikz
       - uses: xu-cheng/latex-action@v3
         with:
           extra_system_packages: "inkscape"
@@ -17,7 +19,6 @@ jobs:
           root_file: Sprawozdanie.tex
       - name: Copy
         run: |
-          mdkir tikz
           mkdir out
           cp ./Projekt/docs/Sprawozdanie.pdf ./out/Sprawozdanie.pdf
       - name: Upload PDF file
