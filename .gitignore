@@ -16,9 +16,9 @@
 *.dep
 *.dpth
 *.raw
-*.txt
 *.auxlock
 *.pdf
 *.test
 .venv/
 Projekt/docs/tikz
+Projekt/LTSpice/*/*.txt
