@@ -9,9 +9,13 @@ jobs:
       - name: Compile LaTeX document
         uses: xu-cheng/latex-action@v3
         with:
+          root_file: Projekt/docs/Sprawozdanie.tex
           latexmk_shell_escape: true
           latexmk_use_lualatex: true
-          root_file: Projekt/docs/Sprawozdanie.tex
+        env: |
+          BIBINPUTS=Projekt/docs/
+          BSTINPUTS=Projekt/docs/
+          TEXINPUTS=Projekt/docs/:Projekt/docs/sections/:Projekt/docs/figures/
       - name: Upload PDF file
         uses: actions/upload-artifact@v4
         with:
