@@ -6,10 +6,6 @@ jobs:
     steps:
       - name: Set up Git repository
         uses: actions/checkout@v4
-      - name: Download custom template
-        run: |
-          curl -OL https://example.com/custom_template.zip
-          unzip custom_template.zip
       - uses: xu-cheng/latex-action@v3
         with:
           root_file: Sprawozdanie.tex
