@@ -1,11 +1,11 @@
 LTspice 24.0.9 for Windows
-Circuit: * C:\Studia\ELA2\Projekt\LTSpice\Analog 2\Analog_2.asc
-Start Time: Wed May 29 18:44:41 2024
+Circuit: * C:\Studia\ELA2\Projekt\LTSpice\Analog_2\Analog_2.asc
+Start Time: Fri May 31 00:08:45 2024
 solver = Normal
 Maximum thread count: 12
-tnom = 27
-temp = 27
-method = modified trap
+
+
+
 trtol = 20
 c2: Increased Cpar to 1.5e-12
 c5: Increased Cpar to 4.7e-18
@@ -29,13 +29,132 @@ Ignoring empty pin current: Ix(u1:8)
 Ignoring empty pin current: Ix(u1:13)
 Ignoring empty pin current: Ix(u1:15)
 Ignoring empty pin current: Ix(u1:16)
+.step iwy=0
 
-pin: AVG(-v(in)*i(v1))=1.22063 FROM 0.004 TO 0.005
-pout: AVG(v(out)*i(i1))=1.19401 FROM 0.004 TO 0.005
-eff: (pout/pin)*100=97.8187
-vout_avg: AVG(v(out))=11.9401 FROM 0.004 TO 0.005
-vout_pp: PP(v(out)*1000)=7.96413 FROM 0.004 TO 0.005
-vin_pp: PP(v(in)*1000)=3.76606 FROM 0.004 TO 0.005
 
-Total elapsed time: 79.419 seconds.
+
+.step iwy=0.01
+
+
+
+.step iwy=0.02
+
+
+
+.step iwy=0.03
+
+
+
+.step iwy=0.04
+
+
+
+.step iwy=0.05
+
+
+
+.step iwy=0.06
+
+
+
+.step iwy=0.07
+
+
+
+.step iwy=0.08
+
+
+
+.step iwy=0.09
+tnom = 27
+temp = 27
+method = Gear
+.step iwy=0.1
+
+
+Measurement: pin
+  step	AVG(-v(in)*i(v1))	FROM	TO
+     1	5.55851e-05	0.004	0.005
+     2	0.123843	0.004	0.005
+     3	0.247934	0.004	0.005
+     4	0.374293	0.004	0.005
+     5	0.501554	0.004	0.005
+     6	0.631307	0.004	0.005
+     7	0.749786	0.004	0.005
+     8	0.870589	0.004	0.005
+     9	1.00083	0.004	0.005
+    10	1.12261	0.004	0.005
+    11	1.24154	0.004	0.005
+
+Measurement: pout
+  step	AVG(v(out)*i(i1))	FROM	TO
+     1	0	0.004	0.005
+     2	0.119459	0.004	0.005
+     3	0.238916	0.004	0.005
+     4	0.358372	0.004	0.005
+     5	0.477827	0.004	0.005
+     6	0.597277	0.004	0.005
+     7	0.716725	0.004	0.005
+     8	0.836083	0.004	0.005
+     9	0.95546	0.004	0.005
+    10	1.07485	0.004	0.005
+    11	1.19423	0.004	0.005
+
+Measurement: eff
+  step	(pout/pin)*100
+     1	0
+     2	96.4599
+     3	96.3631
+     4	95.7465
+     5	95.2693
+     6	94.6097
+     7	95.5906
+     8	96.0365
+     9	95.4664
+    10	95.7462
+    11	96.1894
+
+Measurement: vout_avg
+  step	AVG(v(out))	FROM	TO
+     1	12.2709	0.004	0.005
+     2	11.9459	0.004	0.005
+     3	11.9458	0.004	0.005
+     4	11.9457	0.004	0.005
+     5	11.9457	0.004	0.005
+     6	11.9455	0.004	0.005
+     7	11.9454	0.004	0.005
+     8	11.944	0.004	0.005
+     9	11.9432	0.004	0.005
+    10	11.9428	0.004	0.005
+    11	11.9423	0.004	0.005
+
+Measurement: vout_pp
+  step	PP(v(out)*1000)	FROM	TO
+     1	0.363658	0.004	0.005
+     2	5.57709	0.004	0.005
+     3	3.92723	0.004	0.005
+     4	4.95338	0.004	0.005
+     5	6.48785	0.004	0.005
+     6	4.02546	0.004	0.005
+     7	4.96769	0.004	0.005
+     8	2.40231	0.004	0.005
+     9	2.43282	0.004	0.005
+    10	2.24018	0.004	0.005
+    11	1.42765	0.004	0.005
+
+Measurement: vin_pp
+  step	PP(v(in)*1000)	FROM	TO
+     1	0	0.004	0.005
+     2	7.74956	0.004	0.005
+     3	8.358	0.004	0.005
+     4	8.61835	0.004	0.005
+     5	9.17149	0.004	0.005
+     6	8.19397	0.004	0.005
+     7	7.14493	0.004	0.005
+     8	1.70326	0.004	0.005
+     9	1.94931	0.004	0.005
+    10	2.34032	0.004	0.005
+    11	2.23446	0.004	0.005
+
+Total elapsed time: 655.576 seconds.
 

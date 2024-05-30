@@ -1,0 +1,40 @@
+LTspice 24.0.9 for Windows
+Circuit: * C:\Studia\ELA2\Projekt\LTSpice\Analog_3\Analog_3.asc
+Start Time: Fri May 31 01:00:35 2024
+solver = Normal
+Maximum thread count: 12
+
+
+
+trtol = 20
+c2: Increased Cpar to 1.5e-12
+c5: Increased Cpar to 4.7e-18
+c6: Increased Cpar to 6.25e-12
+c7: Increased Cpar to 6.88e-12
+c8: Increased Cpar to 6.25e-12
+c9: Increased Cpar to 6.25e-12
+c10: Increased Cpar to 6.25e-12
+c11: Increased Cpar to 6.25e-12
+c12: Increased Cpar to 6.88e-12
+Direct Newton iteration for .op point succeeded.
+Ignoring empty pin current: Ix(u1:4)
+Ignoring empty pin current: Ix(u1:6)
+Ignoring empty pin current: Ix(u1:8)
+Ignoring empty pin current: Ix(u1:13)
+Ignoring empty pin current: Ix(u1:15)
+Ignoring empty pin current: Ix(u1:16)
+Ignoring empty pin current: Ix(u1:4)
+Ignoring empty pin current: Ix(u1:6)
+Ignoring empty pin current: Ix(u1:8)
+Ignoring empty pin current: Ix(u1:13)
+Ignoring empty pin current: Ix(u1:15)
+Ignoring empty pin current: Ix(u1:16)
+.step iwy=0
+
+
+
+.step iwy=0.01
+
+
+
+.step iwy=0.02

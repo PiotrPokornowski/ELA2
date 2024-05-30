@@ -1,0 +1,39 @@
+* C:\Studia\ELA2\Projekt\LTSpice\Analog_3\Analog_3.asc
+XU1 IN N007 IN MP_01 N004 MP_02 N003 MP_03 N005 N006 N009 0 MP_04 N001 MP_05 MP_06 0 LT8362
+L1 IN N001 flux={4.7u*5.5A}*tanh(x/{5.5A}) Rser=28m
+V1 IN 0 10 Rser=100m
+C1 N009 0 20n
+R1 N006 0 20k
+C2 N002 N001 1.5µ Rser=6m Lser=0.3n
+L2 N002 N003 flux={4.7u*5.5A}*tanh(x/{5.5A}) Rser=28m
+C3 0 N004 1µ
+R2 N008 N007 36.5k
+C4 0 N008 680p
+R3 N003 N005 1Meg
+C5 N003 N005 4.7p Rser=2m Lser=0.2n
+C6 N003 0 6.25µ Rser=2.5m Lser=0.3n
+R4 N005 0 71.4k
+I1 0 OUT {Iwy} load
+C7 IN 0 6.88µ Rser=2.5m Lser=0.3n
+C8 N003 0 6.25µ Rser=2.5m Lser=0.3n
+C9 OUT 0 6.25µ Rser=2.5m Lser=0.3n
+L3 N003 OUT flux={3.3u*13.5A}*tanh(x/{13.5A}) Rser=0.0075
+C10 N003 0 6.25µ Rser=2.5m Lser=0.3n
+C11 OUT 0 6.25µ Rser=2.5m Lser=0.3n
+D1 N002 0 DI_DFLS260
+C12 IN 0 6.88µ Rser=2.5m Lser=0.3n
+.model D D
+.lib C:\Users\Piotr\AppData\Local\LTspice\lib\cmp\standard.dio
+.tran 8m startup
+.meas Pin AVG -V(IN)*I(V1) FROM 4m
+.meas Pout AVG -V(OUT)*I(I1) FROM 4m
+.meas Eff param (Pout/Pin)*100 FROM 4m
+.meas Vout_avg AVG V(OUT) FROM 4m
+.meas Vout_pp PP V(OUT)*1000 FROM 4m
+.meas Vin_pp PP V(IN)*1000 FROM 4m
+.MODEL DI_DFLS260 D  ( IS=721.4n RS=80.00m BV=60.00 IBV=10.00
++ CJO=320.8p M=450.7m N=1.029 TT=10.00n EG=480.0m VJ=292.4m )
+.step param Iwy 0 0.1 0.01
+.lib LT8362.sub
+.backanno
+.end
