@@ -1,0 +1,150 @@
+LTspice 24.0.9 for Windows
+Circuit: * C:\Studia\ELA2\Projekt\LTSpice\Analog_1\Analog_1.asc
+Start Time: Thu May 30 21:47:30 2024
+Warning: Multiple definitions of model "u1:p" Type: BJT
+solver = Normal
+Maximum thread count: 12
+
+
+
+trtol = 20
+c1: Increased Cpar to 1.03e-12
+c2: Increased Cpar to 3.53e-12
+Direct Newton iteration for .op point succeeded.
+Ignoring empty pin current: Ix(u1:3)
+Ignoring empty pin current: Ix(u1:6)
+Ignoring empty pin current: Ix(u1:7)
+Ignoring empty pin current: Ix(u1:9)
+Ignoring empty pin current: Ix(u1:3)
+Ignoring empty pin current: Ix(u1:6)
+Ignoring empty pin current: Ix(u1:7)
+Ignoring empty pin current: Ix(u1:9)
+.step iwy=0
+
+
+
+.step iwy=0.025
+
+
+
+.step iwy=0.05
+
+
+
+.step iwy=0.075
+
+
+
+.step iwy=0.1
+
+
+
+.step iwy=0.125
+
+
+
+.step iwy=0.15
+
+
+
+.step iwy=0.175
+
+
+
+.step iwy=0.2
+
+
+
+.step iwy=0.225
+tnom = 27
+temp = 27
+method = Gear
+.step iwy=0.25
+
+
+Measurement: pin
+  step	AVG(-v(in)*i(v1))	FROM	TO
+     1	0.000516013	0.007	0.008
+     2	0.259002	0.007	0.008
+     3	0.517138	0.007	0.008
+     4	0.77514	0.007	0.008
+     5	1.03301	0.007	0.008
+     6	1.29074	0.007	0.008
+     7	1.54834	0.007	0.008
+     8	1.80581	0.007	0.008
+     9	2.06314	0.007	0.008
+    10	2.32034	0.007	0.008
+    11	2.57741	0.007	0.008
+
+Measurement: pout
+  step	AVG(v(out)*i(i1))	FROM	TO
+     1	0	0.007	0.008
+     2	0.125306	0.007	0.008
+     3	0.250558	0.007	0.008
+     4	0.375754	0.007	0.008
+     5	0.500896	0.007	0.008
+     6	0.625983	0.007	0.008
+     7	0.751015	0.007	0.008
+     8	0.875991	0.007	0.008
+     9	1.00091	0.007	0.008
+    10	1.12578	0.007	0.008
+    11	1.25059	0.007	0.008
+
+Measurement: eff
+  step	(pout/pin)*100
+     1	0
+     2	48.3805
+     3	48.4509
+     4	48.4757
+     5	48.4891
+     6	48.4979
+     7	48.5045
+     8	48.5097
+     9	48.514
+    10	48.5178
+    11	48.5213
+
+Measurement: vout_avg
+  step	AVG(v(out))	FROM	TO
+     1	5.06953	0.007	0.008
+     2	5.01225	0.007	0.008
+     3	5.01116	0.007	0.008
+     4	5.01006	0.007	0.008
+     5	5.00896	0.007	0.008
+     6	5.00786	0.007	0.008
+     7	5.00676	0.007	0.008
+     8	5.00567	0.007	0.008
+     9	5.00457	0.007	0.008
+    10	5.00347	0.007	0.008
+    11	5.00237	0.007	0.008
+
+Measurement: vout_pp
+  step	PP(v(out)*1000)	FROM	TO
+     1	2.82153	0.007	0.008
+     2	0.140743	0.007	0.008
+     3	0.140012	0.007	0.008
+     4	0.139272	0.007	0.008
+     5	0.138762	0.007	0.008
+     6	0.138233	0.007	0.008
+     7	0.138035	0.007	0.008
+     8	0.13728	0.007	0.008
+     9	0.136942	0.007	0.008
+    10	0.136294	0.007	0.008
+    11	0.136151	0.007	0.008
+
+Measurement: vin_pp
+  step	PP(v(in)*1000)	FROM	TO
+     1	0	0.007	0.008
+     2	0	0.007	0.008
+     3	0	0.007	0.008
+     4	0	0.007	0.008
+     5	0	0.007	0.008
+     6	0	0.007	0.008
+     7	0	0.007	0.008
+     8	0	0.007	0.008
+     9	0	0.007	0.008
+    10	0	0.007	0.008
+    11	0	0.007	0.008
+
+Total elapsed time: 0.495 seconds.
+

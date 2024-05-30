@@ -21,3 +21,4 @@
 *.pdf
 *.test
 .venv/
+Projekt/docs/tikz

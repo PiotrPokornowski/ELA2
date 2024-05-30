@@ -37,6 +37,24 @@
                 }
         }}
 
+
+        \pgfplotsset{
+    tick scale binop/.code args={#1:#2}{%
+        \pgfkeysalso{/pgfplots/tick label style={/pgf/number format/fixed, /pgf/number format/fixed zerofill=true}}%
+        \pgfmathparse{#2*pow(10,#1)}%
+    },
+    xtick scale label/.style={
+        scaled x ticks=manual:#1,
+        xtick scale binop=#1,
+        xticklabel={$\pgfmathprintnumber{\tick}$}
+    },
+    ytick scale label/.style={
+        scaled y ticks=manual:#1,
+        ytick scale binop=#1,
+        yticklabel={$\pgfmathprintnumber{\tick}$ mA}
+    }
+}
+
 \begin{document}
 
 \maketitle
@@ -136,6 +154,96 @@ Kondensatory zostały dobrane zgodnie z zaleceniami producenta układu, jednocze
         4.0                          & 95.31                   & 73                      \\
         4.5                          & 94.80                   & 74                      \\
         5.0                          & 94.28                   & 76                      \\
+        \bottomrule
+    \end{tabular}
+\end{table}
+
+% ----------------------------------------------
+
+\section{Sekcja analogowa I}
+\subsection{Opis układu}
+Zaprojektowany układ obniża napięcie z \SI{10}{\V} do \SI{5}{\V} i działa dla prądu maksymalnego \SI{250}{\milli\A}. Jego zadaniem jest zasilanie analogowej sekcji układu, która powinna mieć jak najmniejsze tętnienia. Z tego powodu ten układ został wykonany z użyciem wyłącznie stabilizatora.
+
+\begin{figure}[H]
+    \centering
+    \begin{adjustbox}{width=1.1\textwidth,center}
+        \subfloat[Schemat układu]{
+            \includegraphics[width=\textwidth]{./figures/analog_1/schematic.png}
+            \label{fig:subfig1}
+        }
+        \qquad
+        \subfloat[Przebiegi czasowe prądu i napięcia na wyjściu układu]{
+            \begin{tikzpicture}
+                \pgfplotsset{
+                    scale only axis,
+                    scaled x ticks=base 10:3,
+                    xmin=0, xmax=0.008
+                }
+
+                \begin{axis}[
+                        grid=both,
+                        axis y line*=left,
+                        ymin=-1, ymax=6,
+                        xlabel={Czas $t$ [s]},
+                        ylabel={Napięcie wyjściowe $V_{\text{OUT}}$ [V]},
+                    ]
+                    \addplot[green, thick] table {./figures/analog_1/vout/vout.txt};\label{vout}
+                    \label{plot:vout}
+                \end{axis}
+
+                \begin{axis}[
+                        axis y line*=right,
+                        axis x line=none,
+                        ymin=-0.050,
+                        ymax=.300,
+                        ytick pos=right,
+                        yticklabel pos=right,
+                        ytick = {-0.05, 0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3},
+                        yticklabels = {-50, 0, 50, 100, 150, 200, 250, 300},
+                        ylabel={Prąd wyjściowy $I_{\text{OUT}}$ [mA]},
+                        legend style={at={(0.95,0.05)},anchor=south east},
+                    ]
+                    \addlegendimage{/pgfplots/refstyle=vout}
+                    \addlegendentry{$V_{OUT}$}
+                    \addplot[red, thick] table {./figures/analog_1/iout/iout.txt};\label{iout}
+
+                    \addlegendimage{/pgfplots/refstyle=iout}
+                    \addlegendentry{$I_{OUT}$}
+                    \label{plot:current}
+                \end{axis}
+            \end{tikzpicture}
+
+            \label{fig:subfig2}
+        }
+    \end{adjustbox}
+\end{figure}
+
+\subsection{Wybór elementów}
+\subsubsection{Wybór stabilizatora}
+W układzie został wykorzystany stabilizator LT3012, ponieważ jego parametry spełniają wymagania projektowe, a producent poleca go do wykorzystania w nowych projektach.
+
+\subsubsection{Dobór kondensatorów}
+Kondensatory zostały dobrane zgodnie z zaleceniami producenta układu, jednocześnie biorąc pod uwagę spadek pojemności. Wszystkie użyte kondensatory to kondensatory MLCC. Dodatkową kwestią przy ich wyborze, był fakt, że są one już wykorzystywane w sekcji cyfrowej, co pozwoliło na zmniejszenie kosztów.
+\subsection{Wyniki symulacji}
+\begin{table}[H]
+    \centering
+    \caption{Porównanie wyników symulacji w zależności od obciążenia}
+    \label{tab:efficiency_ripple}
+    \begin{tabular}{ccc}
+        \toprule
+        \textbf{Prąd obciążenia [A]} & \textbf{Sprawność [\%]} & \textbf{Tętnienia [mV]} \\
+        \midrule
+        0.0                          & 0                       & 2.82                    \\
+        0.5                          & 48.38                   & 0.141                   \\
+        1.0                          & 48.45                   & 0.140                   \\
+        1.5                          & 48.48                   & 0.139                   \\
+        2.0                          & 48.49                   & 0.139                   \\
+        2.5                          & 48.50                   & 0.138                   \\
+        3.0                          & 48.50                   & 0.138                   \\
+        3.5                          & 48.51                   & 0.137                   \\
+        4.0                          & 48.51                   & 0.137                   \\
+        4.5                          & 48.52                   & 0.136                   \\
+        5.0                          & 48.52                   & 0.136                   \\
         \bottomrule
     \end{tabular}
 \end{table}
