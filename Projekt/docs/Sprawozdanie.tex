@@ -57,52 +57,87 @@ Zaprojektowana przetwornica obniża napięcie z \SI{10}{\V} do \SI{5}{\V} i dzia
         \qquad
         \subfloat[Przebiegi czasowe prądu i napięcia na wyjściu układu]{
             \begin{tikzpicture}
+                \pgfplotsset{
+                    scale only axis,
+                    scaled x ticks=base 10:3,
+                    xmin=0, xmax=0.008
+                }
+
                 \begin{axis}[
-                        %axis background/.style={fill=black},
                         grid=both,
-                        xlabel={$t$},
-                        ylabel= { $V_{\text{OUT}}$ },
-                        ymin=-1,
-                        ymax=6,
-                        xmin=0,
-                        xmax=0.008,
-                        ytick distance=1,
-                        xtick distance=0.001,
-                        tick label style={font=\tiny},
-                        title={\SI{5}{\V} / \SI{5}{\A}},
+                        axis y line*=left,
+                        ymin=-1, ymax=6,
+                        xlabel={Czas $t$ [s]},
+                        ylabel={Napięcie wyjściowe $V_{\text{OUT}}$ [V]},
                     ]
-                    \addplot[color=green] table {./figures/digital/vout/segment_1.csv};
-                    \addplot[color=green] table {./figures/digital/vout/segment_2.csv};
-                    \label{plot:vout} % Label for vout plot
+                    \addplot[green, thick] table {./figures/digital/vout/segment_1.csv};\label{vout}
+                    \addplot[green, thick] table {./figures/digital/vout/segment_2.csv};
+                    \label{plot:vout}
                 \end{axis}
 
-                % Adding extra y-axis for current
                 \begin{axis}[
                         axis y line*=right,
                         axis x line=none,
                         ymin=-1,
                         ymax=6,
-                        xmin=0,
-                        xmax=0.008,
                         ytick pos=right,
                         yticklabel pos=right,
                         ytick distance=1,
-                        ylabel={$I_{\text{OUT}}$},
-                        tick label style={font=\tiny},
+                        ylabel={Prąd wyjściowy $I_{\text{OUT}}$ [A]},
+                        legend style={at={(0.95,0.05)},anchor=south east},
                     ]
-                    \addplot[color=red] table {./figures/digital/iout/segment_1.csv};
-                    \addplot[color=red] table {./figures/digital/iout/segment_2.csv};
-                    \label{plot:current} % Label for current plot
+                    \addlegendimage{/pgfplots/refstyle=vout}
+                    \addlegendentry{$V_{OUT}$}
+                    \addplot[red, thick] table {./figures/digital/iout/segment_1.csv};\label{iout}
+                    \addplot[red, thick] table {./figures/digital/iout/segment_2.csv};
+
+                    \addlegendimage{/pgfplots/refstyle=iout}
+                    \addlegendentry{$I_{OUT}$}
+                    \label{plot:current}
                 \end{axis}
             \end{tikzpicture}
+
             \label{fig:subfig2}
         }
     \end{adjustbox}
 \end{figure}
 
 \subsection{Wybór elementów}
-Wykorzystany układ LT8640 został wybrany, ponieważ spełniał wymagania projektowe oraz był dostępny w dużych ilościach wśród dostawców, dodatkowo Analog Devices sugeruje go jako jeden z układów do wykorzystania przy nowych projektach.\\
-Cewka została dobrana zgodnie ze wzorem $L = \frac{V_{OUT} + V_{SW(BOT)}}{f_{SW}} \approx \SI{3.6}{\micro\H}$ dostępnym w nocie katalogowej. W układzie znalazła się więc najbliższa z szeregu cewka o wartości \SI{3.3}{\micro\H}, podobna cewka o takiej samej wartości jest używana w przykładowym układzie producenta.\\
-Kondensatory zostały dobrane zgodnie z zaleceniami producenta układu, jednocześnie biorąc pod uwagę spadek pojemności. Wszystkie użyte kondensatory to kondensatory MLCC, z wyjątkiem dwóch dużych kondensatorów wyjściowych. Zamiast MLCC użyte są tam aluminiowe kondensatory elektrolityczne, co pozwoliło na znaczną redukcję kosztów przy zachowaniu dobrych parametrów \textemdash \ wykorzystanie w tym miejscu trudno dostępnych kondensatorów ceramicznych o pojemności \SI{47}{\micro\F} byłoby nieopłacalne, gdyż kosztowały one więcej niż cała reszta elementów w układzie. Dokładne informacje o elementach znajdują się w pliku BOM.
+\subsubsection{Wybór LT8640}
+Wykorzystany układ LT8640 został wybrany, ponieważ spełniał wymagania projektowe oraz był dostępny w dużych ilościach wśród dostawców. Dodatkowo, Analog Devices sugeruje go jako jeden z układów do wykorzystania przy nowych projektach.
+
+\subsubsection{Dobór cewki}
+Cewka została dobrana zgodnie ze wzorem
+\[
+    L = \frac{V_{OUT} + V_{SW(BOT)}}{f_{SW}} \approx \SI{3.6}{\micro\henry}
+\]
+dostępnym w nocie katalogowej. W układzie znalazła się więc najbliższa z szeregu cewka o wartości \SI{3.3}{\micro\henry}. Podobna cewka o takiej samej wartości jest używana w przykładowym układzie producenta.
+
+\subsubsection{Dobór kondensatorów}
+Kondensatory zostały dobrane zgodnie z zaleceniami producenta układu, jednocześnie biorąc pod uwagę spadek pojemności. Wszystkie użyte kondensatory to kondensatory MLCC, z wyjątkiem dwóch dużych kondensatorów wyjściowych. Zamiast MLCC użyte są tam aluminiowe kondensatory elektrolityczne, co pozwoliło na znaczną redukcję kosztów przy zachowaniu dobrych parametrów. Wykorzystanie w tym miejscu trudno dostępnych kondensatorów ceramicznych o pojemności \SI{47}{\micro\farad} byłoby nieopłacalne, gdyż kosztowały one więcej niż cała reszta elementów w układzie. Dokładne lista elementów znajduje się w pliku BOM.
+
+\subsection{Wyniki symulacji}
+\begin{table}[H]
+    \centering
+    \caption{Porównanie wyników symulacji w zależności od obciążenia}
+    \label{tab:efficiency_ripple}
+    \begin{tabular}{ccc}
+        \toprule
+        \textbf{Prąd obciążenia [A]} & \textbf{Sprawność [\%]} & \textbf{Tętnienia [mV]} \\
+        \midrule
+        0.0                          & 0                       & 0.68                    \\
+        0.5                          & 97.76                   & 70                      \\
+        1.0                          & 97.99                   & 71                      \\
+        1.5                          & 97.70                   & 72                      \\
+        2.0                          & 97.28                   & 71                      \\
+        2.5                          & 96.82                   & 71                      \\
+        3.0                          & 96.33                   & 71                      \\
+        3.5                          & 95.92                   & 72                      \\
+        4.0                          & 95.31                   & 73                      \\
+        4.5                          & 94.80                   & 74                      \\
+        5.0                          & 94.28                   & 76                      \\
+        \bottomrule
+    \end{tabular}
+\end{table}
 
 \end{document}

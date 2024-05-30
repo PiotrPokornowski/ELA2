@@ -1,0 +1,168 @@
+LTspice 24.0.9 for Windows
+Circuit: * C:\Studia\ELA2\Projekt\LTSpice\Digital\buck.asc
+Start Time: Thu May 30 19:24:11 2024
+solver = Normal
+Maximum thread count: 12
+
+
+
+trtol = 20
+c1: Increased Cpar to 1e-12
+c3: Increased Cpar to 1e-13
+c5: Increased Cpar to 4.7e-18
+c6: Increased Cpar to 6.88e-12
+c7: Increased Cpar to 1.03e-12
+c8: Increased Cpar to 1.03e-12
+c2: Increased Cpar to 1e-14
+c10: Increased Cpar to 4.36e-11
+c4: Increased Cpar to 4.36e-11
+c9: Increased Cpar to 1.27e-12
+Direct Newton iteration failed to find .op point.  (Use ".option noopiter" to skip.)
+Starting Gmin stepping
+Gmin = 10
+Gmin = 1.07374
+Gmin = 0.115292
+Gmin = 0.0123794
+Gmin = 0.00132923
+Gmin = 0.000142725
+Gmin = 1.5325e-05
+Gmin = 1.6455e-06
+Gmin = 1.76685e-07
+Gmin = 1.89714e-08
+Gmin = 2.03704e-09
+Gmin = 2.18725e-10
+Gmin = 2.34854e-11
+Gmin = 2.52173e-12
+Gmin = 2.70769e-13
+Gmin = 0
+Gmin stepping succeeded in finding the operating point.
+
+.step iwy=0
+
+
+
+.step iwy=0.5
+
+
+
+.step iwy=1
+
+
+
+.step iwy=1.5
+
+
+
+.step iwy=2
+
+
+
+.step iwy=2.5
+
+
+
+.step iwy=3
+
+
+
+.step iwy=3.5
+
+
+
+.step iwy=4
+
+
+
+.step iwy=4.5
+tnom = 27
+temp = 27
+method = Gear
+.step iwy=5
+
+
+Measurement: pin
+  step	AVG(-v(in)*i(v1))	FROM	TO
+     1	0.0200116	0.007	0.008
+     2	2.53568	0.007	0.008
+     3	5.05786	0.007	0.008
+     4	7.60736	0.007	0.008
+     5	10.1855	0.007	0.008
+     6	12.7913	0.007	0.008
+     7	15.427	0.007	0.008
+     8	18.0923	0.007	0.008
+     9	20.7874	0.007	0.008
+    10	23.5096	0.007	0.008
+    11	26.2625	0.007	0.008
+
+Measurement: pout
+  step	AVG(v(out)*i(i1))	FROM	TO
+     1	0	0.007	0.008
+     2	2.47879	0.007	0.008
+     3	4.95608	0.007	0.008
+     4	7.43252	0.007	0.008
+     5	9.90885	0.007	0.008
+     6	12.3851	0.007	0.008
+     7	14.861	0.007	0.008
+     8	17.3365	0.007	0.008
+     9	19.8117	0.007	0.008
+    10	22.2865	0.007	0.008
+    11	24.7609	0.007	0.008
+
+Measurement: eff
+  step	(pout/pin)*100
+     1	0
+     2	97.7563
+     3	97.9877
+     4	97.7017
+     5	97.284
+     6	96.8245
+     7	96.3312
+     8	95.8229
+     9	95.3063
+    10	94.7973
+    11	94.2824
+
+Measurement: vout_avg
+  step	AVG(v(out))	FROM	TO
+     1	5.0278	0.007	0.008
+     2	4.95758	0.007	0.008
+     3	4.95608	0.007	0.008
+     4	4.95501	0.007	0.008
+     5	4.95442	0.007	0.008
+     6	4.95404	0.007	0.008
+     7	4.95367	0.007	0.008
+     8	4.9533	0.007	0.008
+     9	4.95292	0.007	0.008
+    10	4.95255	0.007	0.008
+    11	4.95217	0.007	0.008
+
+Measurement: vout_pp
+  step	PP(v(out)*1000)	FROM	TO
+     1	0.678084	0.007	0.008
+     2	69.5219	0.007	0.008
+     3	70.8184	0.007	0.008
+     4	72.1841	0.007	0.008
+     5	70.7383	0.007	0.008
+     6	71.0115	0.007	0.008
+     7	70.9538	0.007	0.008
+     8	71.7812	0.007	0.008
+     9	73.0181	0.007	0.008
+    10	74.2044	0.007	0.008
+    11	75.922	0.007	0.008
+
+Measurement: vin_pp
+  step	PP(v(in)*1000)	FROM	TO
+     1	0	0.007	0.008
+     2	147.749	0.007	0.008
+     3	234.753	0.007	0.008
+     4	316.64	0.007	0.008
+     5	402.932	0.007	0.008
+     6	485.24	0.007	0.008
+     7	565.538	0.007	0.008
+     8	649.688	0.007	0.008
+     9	730.417	0.007	0.008
+    10	813.728	0.007	0.008
+    11	899.403	0.007	0.008
+
+Total elapsed time: 3174.999 seconds.
+
