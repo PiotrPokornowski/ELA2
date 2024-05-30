@@ -13,9 +13,7 @@ jobs:
           continue_on_error: true
           texlive_version: 2024
           working_directory: Projekt/docs
-          root_file: Sprawozdanie.tex      
-        env:
-          TEXINPUTS: .:Projekt/docs/:Projekt/docs/sections/:Projekt/docs/figures/
+          root_file: Sprawozdanie.tex
       - name: Upload PDF file
         uses: actions/upload-artifact@v4
         with:
