@@ -19,7 +19,7 @@ jobs:
         run: |
           ls
           mkdir out
-          cp ./Sprawozdanie.pdf ./out/Sprawozdanie.pdf
+          cp ./Projekt/docs/Sprawozdanie.pdf ./out/Sprawozdanie.pdf
       - name: Upload PDF file
         uses: actions/upload-artifact@v4
         with:
