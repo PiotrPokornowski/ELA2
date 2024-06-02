@@ -1,4 +1,4 @@
-\documentclass{article}
+\documentclass[11pt]{article}
 \usepackage{graphicx} % Required for inserting images
 \usepackage{babel}[polish]
 %\usepackage{polski}
@@ -65,13 +65,14 @@ Zaprojektowana przetwornica obniża napięcie z \SI{10}{\V} do \SI{5}{\V} i dzia
 
 \begin{figure}[H]
     \centering
+    \captionsetup{justification=centering}
     \begin{adjustbox}{width=1.1\textwidth,center}
         \subfloat[Schemat układu]{
             \includegraphics[width=\textwidth]{./figures/digital/digital.png}
             \label{fig:subfig1}
         }
         \qquad
-        \subfloat[Przebiegi czasowe prądu i napięcia na wyjściu układu]{
+        \subfloat[Przebiegi czasowe prądu i napięcia na wyjściu układu \\ przy maksymalnym obciążeniu]{
             \begin{tikzpicture}
                 \pgfplotsset{
                     scale only axis,
@@ -130,47 +131,51 @@ Cewka została dobrana zgodnie ze wzorem
 dostępnym w nocie katalogowej. W układzie znalazła się więc najbliższa z szeregu cewka o wartości \SI{3.3}{\micro\henry}. Podobna cewka o takiej samej wartości jest używana w przykładowym układzie producenta.
 
 \subsubsection{Dobór kondensatorów}
-Kondensatory zostały dobrane zgodnie z zaleceniami producenta układu, jednocześnie biorąc pod uwagę spadek pojemności. Wszystkie użyte kondensatory to kondensatory MLCC, z wyjątkiem dwóch dużych kondensatorów wyjściowych. Zamiast MLCC użyte są tam aluminiowe kondensatory elektrolityczne, co pozwoliło na znaczną redukcję kosztów przy zachowaniu dobrych parametrów. Wykorzystanie w tym miejscu trudno dostępnych kondensatorów ceramicznych o pojemności \SI{47}{\micro\farad} byłoby nieopłacalne, gdyż kosztowały one więcej niż cała reszta elementów w układzie. Dokładne lista elementów znajduje się w pliku BOM.
+Kondensatory zostały dobrane zgodnie z zaleceniami producenta układu, jednocześnie biorąc pod uwagę spadek pojemności. Wszystkie użyte kondensatory to kondensatory MLCC, z wyjątkiem dwóch dużych kondensatorów wyjściowych. Zamiast MLCC użyte są tam aluminiowe kondensatory elektrolityczne, co pozwoliło na znaczną redukcję kosztów przy zachowaniu dobrych parametrów. Wykorzystanie w tym miejscu trudno dostępnych kondensatorów ceramicznych o pojemności \SI{47}{\micro\farad} byłoby nieopłacalne, gdyż kosztowały one więcej niż cała reszta elementów w układzie.
 
 \subsection{Wyniki symulacji}
 \begin{table}[H]
     \centering
     \caption{Porównanie wyników symulacji w zależności od obciążenia}
     \label{tab:efficiency_ripple}
-    \begin{tabular}{ccc}
+    \begin{tabular}{ccccc}
         \toprule
-        \textbf{Prąd obciążenia [A]} & \textbf{Sprawność [\%]} & \textbf{Tętnienia [mV]} \\
+        \textbf{Prąd obciążenia [mA]} & \textbf{Sprawność [\%]} & $\mathbf{\Delta{V_{IN}} \ [mV]}$ & $\mathbf{\Delta{V_{OUT}} \ [mV]}$ & $\mathbf{V_{AVG} \ [V]}$ \\
         \midrule
-        0.0                          & 0                       & 0.68                    \\
-        0.5                          & 97.76                   & 70                      \\
-        1.0                          & 97.99                   & 71                      \\
-        1.5                          & 97.70                   & 72                      \\
-        2.0                          & 97.28                   & 71                      \\
-        2.5                          & 96.82                   & 71                      \\
-        3.0                          & 96.33                   & 71                      \\
-        3.5                          & 95.92                   & 72                      \\
-        4.0                          & 95.31                   & 73                      \\
-        4.5                          & 94.80                   & 74                      \\
-        5.0                          & 94.28                   & 76                      \\
+        0.0                           & 0.00                    & 0.00                             & 0.68                              & 5.03                     \\
+        0.5                           & 97.76                   & 147.75                           & 69.52                             & 4.96                     \\
+        1.0                           & 97.99                   & 234.75                           & 70.82                             & 4.96                     \\
+        1.5                           & 97.70                   & 316.64                           & 72.18                             & 4.96                     \\
+        2.0                           & 97.28                   & 402.93                           & 70.74                             & 4.95                     \\
+        2.5                           & 96.82                   & 485.24                           & 71.01                             & 4.95                     \\
+        3.0                           & 96.33                   & 565.54                           & 70.95                             & 4.95                     \\
+        3.5                           & 95.92                   & 649.69                           & 71.78                             & 4.95                     \\
+        4.0                           & 95.31                   & 730.42                           & 73.02                             & 4.95                     \\
+        4.5                           & 94.80                   & 813.73                           & 74.20                             & 4.95                     \\
+        5.0                           & 94.28                   & 899.40                           & 75.92                             & 4.95                     \\
         \bottomrule
     \end{tabular}
 \end{table}
+
+\subsection{Wnioski}
+Wykorzystanie przetwornicy impulsowej pozwoliło na uzyskanie bardzo dużej sprawności, co byłoby niemożliwe w przypadku stabilizatora liniowego. Wadą takiego rozwiązania jest jednak większe tętnienie napięcia wyjściowego, co w przypadku zasilania cyfrowego układu nie jest problemem. Kolejną zaletą jest również stabilność napięcia wyjściowego przy zmianach obciążenia, co byłoby niemożliwe gdy do obniżenia napięcia wykorzystany byłby np. prosty dzielnik napięciowy.
 
 % ----------------------------------------------
 
 \section{Sekcja analogowa I}
 \subsection{Opis układu}
-Zaprojektowany układ obniża napięcie z \SI{10}{\V} do \SI{5}{\V} i działa dla prądu maksymalnego \SI{250}{\milli\A}. Jego zadaniem jest zasilanie analogowej sekcji układu, która powinna mieć jak najmniejsze tętnienia. Z tego powodu ten układ został wykonany z użyciem wyłącznie stabilizatora.
+Zaprojektowany układ obniża napięcie z \SI{10}{\V} do \SI{5}{\V} i działa dla prądu maksymalnego \SI{250}{\milli\A}. Jego zadaniem jest zasilanie analogowej sekcji układu, która powinna mieć jak najmniejsze tętnienia. Z tego powodu ten układ został wykonany z użyciem wyłącznie stabilizatora, co powinno zapewnić (przynajmniej w teorii) zerowe tętnienia.
 
 \begin{figure}[H]
     \centering
+    \captionsetup{justification=centering}
     \begin{adjustbox}{width=1.1\textwidth,center}
         \subfloat[Schemat układu]{
             \includegraphics[width=\textwidth]{./figures/analog_1/schematic.png}
             \label{fig:subfig1}
         }
         \qquad
-        \subfloat[Przebiegi czasowe prądu i napięcia na wyjściu układu]{
+        \subfloat[Przebiegi czasowe prądu i napięcia na wyjściu układu \\ przy maksymalnym obciążeniu]{
             \begin{tikzpicture}
                 \pgfplotsset{
                     scale only axis,
@@ -210,7 +215,6 @@ Zaprojektowany układ obniża napięcie z \SI{10}{\V} do \SI{5}{\V} i działa dl
                     \label{plot:current}
                 \end{axis}
             \end{tikzpicture}
-
             \label{fig:subfig2}
         }
     \end{adjustbox}
@@ -227,21 +231,21 @@ Kondensatory zostały dobrane zgodnie z zaleceniami producenta układu, jednocze
     \centering
     \caption{Porównanie wyników symulacji w zależności od obciążenia}
     \label{tab:efficiency_ripple}
-    \begin{tabular}{ccc}
+    \begin{tabular}{ccccc}
         \toprule
-        \textbf{Prąd obciążenia [mA]} & \textbf{Sprawność [\%]} & \textbf{Tętnienia [mV]} \\
+        \textbf{Prąd obciążenia [mA]} & \textbf{Sprawność [\%]} & $\mathbf{\Delta{V_{IN}} \ [mV]}$ & $\mathbf{\Delta{V_{OUT}} \ [mV]}$ & $\mathbf{V_{AVG} \ [V]}$ \\
         \midrule
-        0.0                           & 0                       & 2.82                    \\
-        25.0                          & 48.38                   & 0.141                   \\
-        50.0                          & 48.45                   & 0.140                   \\
-        75.0                          & 48.48                   & 0.139                   \\
-        100.0                         & 48.49                   & 0.139                   \\
-        125.0                         & 48.50                   & 0.138                   \\
-        150.0                         & 48.50                   & 0.138                   \\
-        175.0                         & 48.51                   & 0.137                   \\
-        200.0                         & 48.51                   & 0.137                   \\
-        225.0                         & 48.52                   & 0.136                   \\
-        250.0                         & 48.52                   & 0.136                   \\
+        0.0                           & 0                       & 0.0                              & 2.82                              & 5.07                     \\
+        25.0                          & 48.38                   & 0.0                              & 0.14                              & 5.01                     \\
+        50.0                          & 48.45                   & 0.0                              & 0.14                              & 5.01                     \\
+        75.0                          & 48.48                   & 0.0                              & 0.14                              & 5.01                     \\
+        100.0                         & 48.49                   & 0.0                              & 0.14                              & 5.01                     \\
+        125.0                         & 48.50                   & 0.0                              & 0.14                              & 5.01                     \\
+        150.0                         & 48.50                   & 0.0                              & 0.14                              & 5.01                     \\
+        175.0                         & 48.51                   & 0.0                              & 0.14                              & 5.01                     \\
+        200.0                         & 48.51                   & 0.0                              & 0.14                              & 5.00                     \\
+        225.0                         & 48.52                   & 0.0                              & 0.14                              & 5.00                     \\
+        250.0                         & 48.52                   & 0.0                              & 0.14                              & 5.00                     \\
         \bottomrule
     \end{tabular}
 \end{table}
@@ -254,13 +258,14 @@ Zaprojektowana przetwornica podnosi napięcie z \SI{10}{\V} do \SI{12}{\V} i dzi
 
 \begin{figure}[H]
     \centering
+    \captionsetup{justification=centering}
     \begin{adjustbox}{width=1.2\textwidth,center}
         \subfloat[Schemat układu]{
             \includegraphics[width=\textwidth]{./figures/analog_2/schematic.png}
             \label{fig:subfig1}
         }
         \qquad
-        \subfloat[Przebiegi czasowe prądu i napięcia na wyjściu układu]{
+        \subfloat[Przebiegi czasowe prądu i napięcia na wyjściu układu \\ przy maksymalnym obciążeniu]{
             \begin{tikzpicture}
                 \pgfplotsset{
                     scale only axis,
@@ -271,7 +276,7 @@ Zaprojektowana przetwornica podnosi napięcie z \SI{10}{\V} do \SI{12}{\V} i dzi
                 \begin{axis}[
                         grid=both,
                         axis y line*=left,
-                        ymin=-1, ymax=14,
+                        ymin=-1, ymax=13,
                         xlabel={Czas $t$ [s]},
                         ylabel={Napięcie wyjściowe $V_{\text{OUT}}$ [V]},
                     ]
@@ -283,12 +288,12 @@ Zaprojektowana przetwornica podnosi napięcie z \SI{10}{\V} do \SI{12}{\V} i dzi
                 \begin{axis}[
                         axis y line*=right,
                         axis x line=none,
-                        ymin=-0.02,
-                        ymax=0.12,
+                        ymin=-0.01,
+                        ymax=0.13,
                         ytick pos=right,
                         yticklabel pos=right,
-                        ytick = {-0.02, 0, 0.02, 0.04, 0.06, 0.08, 0.1, 0.12},
-                        yticklabels = {-20, 0, 20, 40, 60, 80, 100, 120},
+                        ytick = {0, 0.02, 0.04, 0.06, 0.08, 0.1, 0.12},
+                        yticklabels = {0, 20, 40, 60, 80, 100, 120},
                         ylabel={Prąd wyjściowy $I_{\text{OUT}}$ [mA]},
                         legend style={at={(0.95,0.05)},anchor=south east},
                     ]
@@ -310,13 +315,13 @@ Zaprojektowana przetwornica podnosi napięcie z \SI{10}{\V} do \SI{12}{\V} i dzi
 
 \subsection{Wybór elementów}
 \subsubsection{Wybór LT8362}
-Przetwornica obniżająca została wykonana w topologii SEPIC, ponieważ charakteryzują sie one mniejszymi tętnieniami napięcia wyjściowego niż przetwornice typu boost. Układ LT8362 został wybrany, ponieważ spełniał wymagania projektowe oraz był dostępny w dużych ilościach wśród dostawców. Dodatkowo, Analog Devices sugeruje go jako jeden z układów do wykorzystania przy nowych projektach.
+Przetwornica obniżająca została wykonana w topologii SEPIC, ponieważ charakteryzują sie one mniejszymi tętnieniami napięcia wyjściowego niż klasyczne przetwornice typu boost. Układ LT8362 został wybrany, ponieważ spełniał wymagania projektowe oraz był dostępny w dużych ilościach wśród dostawców. Dodatkowo, Analog Devices sugeruje go jako jeden z układów do wykorzystania przy nowych projektach.
 
 \subsubsection{Dobór cewki}
 Cewka została dobrana zgodnie ze wzorami dostępnym w nocie katalogowej, jednocześnie sugerując się przykładowym układem producenta. W układzie znalazła się cewka o wartości \SI{4.7}{\micro\henry}.
 
 \subsubsection{Dobór kondensatorów}
-Kondensatory zostały dobrane zgodnie z zaleceniami producenta układu, jednocześnie biorąc pod uwagę spadek pojemności. Wszystkie użyte kondensatory to kondensatory MLCC. Dokładna lista elementów znajduje się w pliku BOM.
+Kondensatory zostały dobrane zgodnie z zaleceniami producenta układu, jednocześnie biorąc pod uwagę spadek pojemności. Wszystkie użyte kondensatory to kondensatory MLCC.
 
 \subsection{Filtr}
 Na wyjściu układu umieszczony został filtr LP w topologii \Pi. Jego zadaniem jest usunięcie składowych wysoko-częstotliwościowych z napięcia wyjściowego, co przekłada się na zmniejszenie tętnień. W celu minimalizacji kosztów wykorzystana została taka sama cewka, jak w sekcji cyfrowej, wybrane zostały również wykorzystane wcześniej kondensatory \SI{10}{\micro\farad}. Pozwoliło to na uzyskanie częstotliwości granicznej: $$f_c = \frac{1}{2\pi \cdot \sqrt{L \cdot C}} = \frac{1}{2\pi \cdot \sqrt{\SI{3.3}{\micro\henry} \cdot \SI{10}{\micro\farad}}} = \SI{27.7}{\kilo\hertz}$$
@@ -327,30 +332,33 @@ W wyniku spadku pojemności kondensatorów rzeczywista częstotliwość graniczn
     \centering
     \caption{Porównanie wyników symulacji w zależności od obciążenia}
     \label{tab:efficiency_ripple}
-    \begin{tabular}{ccc}
+    \begin{tabular}{ccccc}
         \toprule
-        \textbf{Prąd obciążenia [mA]} & \textbf{Sprawność [\%]} & \textbf{Tętnienia [mV]} \\
+        \textbf{Prąd obciążenia [mA]} & \textbf{Sprawność [\%]} & $\mathbf{\Delta{V_{IN}} \ [mV]}$ & $\mathbf{\Delta{V_{OUT}} \ [mV]}$ & $\mathbf{V_{AVG} \ [V]}$ \\
         \midrule
-        0.0                           & 0                       & 0.363                   \\
-        10.0                          & 96.46                   & 5.577                   \\
-        20.0                          & 96.36                   & 3.927                   \\
-        30.0                          & 95.75                   & 4.953                   \\
-        40.0                          & 95.27                   & 6.487                   \\
-        50.0                          & 94.61                   & 4.025                   \\
-        60.0                          & 95.59                   & 4.967                   \\
-        70.0                          & 96.04                   & 2.402                   \\
-        80.0                          & 95.47                   & 2.432                   \\
-        90.0                          & 95.75                   & 2.240                   \\
-        100.0                         & 96.19                   & 1.427                   \\
+        0.0                           & 0                       & 0                                & 0.36                              & 12.27                    \\
+        10.0                          & 96.46                   & 7.75                             & 5.58                              & 11.95                    \\
+        20.0                          & 96.36                   & 8.36                             & 3.93                              & 11.95                    \\
+        30.0                          & 95.75                   & 8.62                             & 4.95                              & 11.95                    \\
+        40.0                          & 95.27                   & 9.17                             & 6.49                              & 11.95                    \\
+        50.0                          & 94.61                   & 8.19                             & 4.03                              & 11.95                    \\
+        60.0                          & 95.59                   & 7.14                             & 4.97                              & 11.95                    \\
+        70.0                          & 96.04                   & 1.70                             & 2.40                              & 11.94                    \\
+        80.0                          & 95.47                   & 1.95                             & 2.43                              & 11.94                    \\
+        90.0                          & 95.75                   & 2.34                             & 2.24                              & 11.94                    \\
+        100.0                         & 96.19                   & 2.23                             & 1.43                              & 11.94                    \\
         \bottomrule
     \end{tabular}
 \end{table}
+
+\subsection{Wnioski}
+Wykorzystanie przetwornicy SEPIC pozwoliło uzyskać bardzo małe tętnienia napięcia wyjściowego. Udało się również uzyskać bardzo dużą sprawność układu.
 
 % --------------------------------
 
 \section{Sekcja analogowa III}
 \subsection{Opis układu}
-Zaprojektowana przetwornica podnosi napięcie z \SI{10}{\V} do \SI{12}{\V} i działa dla prądu maksymalnego \SI{100}{\milli\A}. Jej zadaniem jest zasilanie analogowej sekcji układu, która powinna mieć jak najmniejsze tętnienia. Układ wykorzystuje przetwornicę LT8362. Jest to układ analogiczny do poprzedniego, dzięki wykorzystaniu topologii SEPIC uzyskanie ujemnego napięcia wymaga minimalnej zmiany układu.
+Zaprojektowana przetwornica podnosi i odwraca napięcie z \SI{10}{\V} do \SI{-12}{\V} i działa dla prądu maksymalnego \SI{100}{\milli\A}. Jej zadaniem jest zasilanie analogowej sekcji układu, która powinna mieć jak najmniejsze tętnienia. Układ wykorzystuje przetwornicę LT8362. Jest to układ analogiczny do poprzedniego, dzięki wykorzystaniu topologii SEPIC uzyskanie ujemnego napięcia wymaga minimalnej zmiany układu.
 
 \begin{figure}[H]
     \centering
@@ -427,21 +435,21 @@ W wyniku spadku pojemności kondensatorów rzeczywista częstotliwość graniczn
     \centering
     \caption{Porównanie wyników symulacji w zależności od obciążenia}
     \label{tab:efficiency_ripple}
-    \begin{tabular}{ccc}
+    \begin{tabular}{ccccc}
         \toprule
-        \textbf{Prąd obciążenia [mA]} & \textbf{Sprawność [\%]} & \textbf{Tętnienia [mV]} \\
+        \textbf{Prąd obciążenia [mA]} & \textbf{Sprawność [\%]} & $\mathbf{\Delta{V_{IN}} \ [mV]}$ & $\mathbf{\Delta{V_{OUT}} \ [mV]}$ & $\mathbf{V_{AVG} \ [V]}$ \\
         \midrule
-        0.0                           & 0                       & 0.363                   \\
-        10.0                          & 96.46                   & 5.577                   \\
-        20.0                          & 96.36                   & 3.927                   \\
-        30.0                          & 95.75                   & 4.953                   \\
-        40.0                          & 95.27                   & 6.487                   \\
-        50.0                          & 94.61                   & 4.025                   \\
-        60.0                          & 95.59                   & 4.967                   \\
-        70.0                          & 96.04                   & 2.402                   \\
-        80.0                          & 95.47                   & 2.432                   \\
-        90.0                          & 95.75                   & 2.240                   \\
-        100.0                         & 96.19                   & 1.427                   \\
+        0.0                           & 0.00                    & 0.00                             & 0.76                              & -12.582                  \\
+        10.0                          & 100.35                  & 11.97                            & 15.55                             & -12.005                  \\
+        20.0                          & 97.88                   & 14.97                            & 19.46                             & -12.005                  \\
+        30.0                          & 97.09                   & 16.89                            & 19.17                             & -12.005                  \\
+        40.0                          & 96.49                   & 17.29                            & 14.32                             & -12.005                  \\
+        50.0                          & 95.90                   & 14.91                            & 12.71                             & -12.005                  \\
+        60.0                          & 96.04                   & 11.57                            & 10.68                             & -12.005                  \\
+        70.0                          & 95.95                   & 1.75                             & 2.78                              & -12.005                  \\
+        80.0                          & 95.95                   & 1.91                             & 2.75                              & -12.004                  \\
+        90.0                          & 95.83                   & 2.19                             & 2.33                              & -12.004                  \\
+        100.0                         & 95.73                   & 2.35                             & 2.93                              & -12.004                  \\
         \bottomrule
     \end{tabular}
 \end{table}

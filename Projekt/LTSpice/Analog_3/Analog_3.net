@@ -2,7 +2,7 @@
 XU1 IN N007 IN MP_01 N004 MP_02 N003 MP_03 N005 N006 N009 0 MP_04 N001 MP_05 MP_06 0 LT8362
 L1 IN N001 flux={4.7u*5.5A}*tanh(x/{5.5A}) Rser=28m
 V1 IN 0 10 Rser=100m
-C1 N009 0 20n
+C1 N009 0 10n
 R1 N006 0 20k
 C2 N002 N001 1.5µ Rser=6m Lser=0.3n
 L2 N002 N003 flux={4.7u*5.5A}*tanh(x/{5.5A}) Rser=28m
@@ -12,7 +12,7 @@ C4 0 N008 680p
 R3 N003 N005 1Meg
 C5 N003 N005 4.7p Rser=2m Lser=0.2n
 C6 N003 0 6.25µ Rser=2.5m Lser=0.3n
-R4 N005 0 71.4k
+R4 N005 0 71k4
 I1 0 OUT {Iwy} load
 C7 IN 0 6.88µ Rser=2.5m Lser=0.3n
 C8 N003 0 6.25µ Rser=2.5m Lser=0.3n
@@ -24,13 +24,13 @@ D1 N002 0 DI_DFLS260
 C12 IN 0 6.88µ Rser=2.5m Lser=0.3n
 .model D D
 .lib C:\Users\Piotr\AppData\Local\LTspice\lib\cmp\standard.dio
-.tran 8m startup
-.meas Pin AVG -V(IN)*I(V1) FROM 4m
-.meas Pout AVG -V(OUT)*I(I1) FROM 4m
-.meas Eff param (Pout/Pin)*100 FROM 4m
-.meas Vout_avg AVG V(OUT) FROM 4m
-.meas Vout_pp PP V(OUT)*1000 FROM 4m
-.meas Vin_pp PP V(IN)*1000 FROM 4m
+.tran 10m startup
+.meas Pin AVG -V(IN)*I(V1) FROM 8m
+.meas Pout AVG V(OUT)*I(I1) FROM 8m
+.meas Eff param (Pout/Pin)*100 FROM 8m
+.meas Vout_avg AVG V(OUT) FROM 8m
+.meas Vout_pp PP V(OUT)*1000 FROM 8m
+.meas Vin_pp PP V(IN)*1000 FROM 8m
 .MODEL DI_DFLS260 D  ( IS=721.4n RS=80.00m BV=60.00 IBV=10.00
 + CJO=320.8p M=450.7m N=1.029 TT=10.00n EG=480.0m VJ=292.4m )
 .step param Iwy 0 0.1 0.01
