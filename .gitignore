@@ -20,5 +20,6 @@
 *.pdf
 *.test
 .venv/
+!Projekt/docs/elements/*.pdf
 Projekt/docs/tikz
 Projekt/LTSpice/*/*.txt
