@@ -1,5 +1,5 @@
 LTspice 24.0.9 for Windows
-Circuit: * C:\Studia\ELA2\Projekt\LTSpice\Digital\buck.asc
+Circuit: * C:\Studia\ELA2\Projekt\LTSpice\Digital\digital.asc
 Start Time: Thu May 30 19:24:11 2024
 solver = Normal
 Maximum thread count: 12
