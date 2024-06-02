@@ -15,6 +15,7 @@
 \newcolumntype{Y}{>{\centering\arraybackslash}X}
 \usepackage{xcolor,colortbl}
 \usepackage{titling}
+\usepackage{url}
 
 
 \pgfplotsset{compat=newest}
@@ -430,5 +431,8 @@ Wykorzystanie przetwornicy SEPIC znacząco ułatwiło projektowanie układu. Wyk
 Projektowanie układów zasilających wymaga wyboru między sprawnością, a stabilnością napięcia wyjściowego. Wykorzystanie stabilizatorów liniowych pozwala na uzyskanie bardzo małych tętnień, ale jest to robione kosztem sprawności, która w przybliżeniu wynosi $\eta = \frac{V_{OUT}}{V_{IN}}$. W układach, które są mniej wrażliwe na tętnienia, jak np. układy cyfrowe, warto zastosować przetwornice impulsowe, których sprawności sięgają rzędu \SI{90}{\percent}.\\
 Podczas projektowania bardzo ważne okazuje się również uwzględnienie parametrów pasożytniczych, które mają bardzo duży wpływ na działanie układu. Przykładem może być tutaj przetwornica z sekcji cyfrowej, gdzie usunięcie kondensatora MLCC i pozostawienie jedynie kondensatora elektrolitycznego spowodowało podniesienie tętnień z kilkudziesięciu mV do kilkuset mV.\\
 Dokładna lista wszystkich elementów znajduje się w dołączonym do projektu pliku BOM.
+\\
+
+\noindent Całość projektu jest dostępna w repozystorium na GitHubie pod adresem:\\ \url{https://github.com/PiotrPokornowski/ELA2}
 
 \end{document}
