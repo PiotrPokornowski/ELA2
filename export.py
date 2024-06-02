@@ -28,8 +28,8 @@ def split_csv(input_file, output_dir, num_segments, n):
             f_out.writelines(segment_lines)
 
 # Example usage:
-input_file = './Projekt/LTSpice/Analog_2/vout.txt'  # Replace 'input.csv' with your input file name
-output_dir = './Projekt/docs/figures/Analog_2/vout/'    # Replace 'segments' with your desired output directory name
+input_file = './Projekt/LTSpice/Analog_3/iout.txt'  # Replace 'input.csv' with your input file name
+output_dir = './Projekt/docs/figures/Analog_3/iout/'    # Replace 'segments' with your desired output directory name
 num_segments = 2            # Number of segments to split the file into
 n = 10                      # Save every Nth line
 split_csv(input_file, output_dir, num_segments, n)

@@ -250,6 +250,8 @@ Kondensatory zostały dobrane zgodnie z zaleceniami producenta układu, jednocze
     \end{tabular}
 \end{table}
 
+\subsection{Wnioski}
+Układ wykonany z użyciem samego stabilizatora charakteryzuje się pomijalnymi tętnieniami napięcia wyjściowego. Wadą takiego rozwiązania jest jednak mniejsza sprawność w porównaniu do przetwornicy impulsowej. W przypadku zasilania analogowej sekcji układu, gdzie priorytetem jest stabilność napięcia, a nie sprawność, jest to jednak akceptowalne rozwiązanie.
 % ----------------------------------------------
 
 \section{Sekcja analogowa II}
@@ -318,7 +320,10 @@ Zaprojektowana przetwornica podnosi napięcie z \SI{10}{\V} do \SI{12}{\V} i dzi
 Przetwornica obniżająca została wykonana w topologii SEPIC, ponieważ charakteryzują sie one mniejszymi tętnieniami napięcia wyjściowego niż klasyczne przetwornice typu boost. Układ LT8362 został wybrany, ponieważ spełniał wymagania projektowe oraz był dostępny w dużych ilościach wśród dostawców. Dodatkowo, Analog Devices sugeruje go jako jeden z układów do wykorzystania przy nowych projektach.
 
 \subsubsection{Dobór cewki}
-Cewka została dobrana zgodnie ze wzorami dostępnym w nocie katalogowej, jednocześnie sugerując się przykładowym układem producenta. W układzie znalazła się cewka o wartości \SI{4.7}{\micro\henry}.
+Cewka o wartości \SI{4.7}{\micro\henry} została dobrana zgodnie ze wzorami dostępnym w nocie katalogowej, jednocześnie sugerując się przykładowym układem producenta, który użył takiej samej cewki w układzie o $V_{OUT} = \SI{12}{\V}$.
+
+\subsection{Wybór diody}
+W układzie wykorzystana została dioda polecana przez producenta układu.
 
 \subsubsection{Dobór kondensatorów}
 Kondensatory zostały dobrane zgodnie z zaleceniami producenta układu, jednocześnie biorąc pod uwagę spadek pojemności. Wszystkie użyte kondensatory to kondensatory MLCC.
@@ -362,37 +367,38 @@ Zaprojektowana przetwornica podnosi i odwraca napięcie z \SI{10}{\V} do \SI{-12
 
 \begin{figure}[H]
     \centering
+    \captionsetup{justification=centering}
     \begin{adjustbox}{width=1.2\textwidth,center}
         \subfloat[Schemat układu]{
-            \includegraphics[width=\textwidth]{./figures/analog_2/schematic.png}
+            \includegraphics[width=\textwidth]{./figures/analog_3/schematic.png}
             \label{fig:subfig1}
         }
         \qquad
-        \subfloat[Przebiegi czasowe prądu i napięcia na wyjściu układu]{
+        \subfloat[Przebiegi czasowe prądu i napięcia na wyjściu układu \\ przy maksymalnym obciążeniu]{
             \begin{tikzpicture}
                 \pgfplotsset{
                     scale only axis,
                     scaled x ticks=base 10:3,
-                    xmin=0, xmax=0.005
+                    xmin=0, xmax=0.01
                 }
 
                 \begin{axis}[
                         grid=both,
                         axis y line*=left,
-                        ymin=-1, ymax=14,
+                        ymin=-13, ymax=1,
                         xlabel={Czas $t$ [s]},
                         ylabel={Napięcie wyjściowe $V_{\text{OUT}}$ [V]},
                     ]
-                    \addplot[green, thick] table {./figures/analog_2/vout/segment_1.csv};\label{vout}
-                    \addplot[green, thick] table {./figures/analog_2/vout/segment_2.csv};
+                    \addplot[green, thick] table {./figures/analog_3/vout/segment_1.csv};\label{vout}
+                    \addplot[green, thick] table {./figures/analog_3/vout/segment_2.csv};
                     \label{plot:vout}
                 \end{axis}
 
                 \begin{axis}[
                         axis y line*=right,
                         axis x line=none,
-                        ymin=-0.02,
-                        ymax=0.12,
+                        ymin=-0.01,
+                        ymax=0.13,
                         ytick pos=right,
                         yticklabel pos=right,
                         ytick = {-0.02, 0, 0.02, 0.04, 0.06, 0.08, 0.1, 0.12},
@@ -402,8 +408,8 @@ Zaprojektowana przetwornica podnosi i odwraca napięcie z \SI{10}{\V} do \SI{-12
                     ]
                     \addlegendimage{/pgfplots/refstyle=vout}
                     \addlegendentry{$V_{OUT}$}
-                    \addplot[red, thick] table {./figures/analog_2/iout/segment_1.csv};\label{iout}
-                    \addplot[red, thick] table {./figures/analog_2/iout/segment_2.csv};
+                    \addplot[red, thick] table {./figures/analog_3/iout/segment_1.csv};\label{iout}
+                    \addplot[red, thick] table {./figures/analog_3/iout/segment_2.csv};
 
                     \addlegendimage{/pgfplots/refstyle=iout}
                     \addlegendentry{$I_{OUT}$}
@@ -417,18 +423,8 @@ Zaprojektowana przetwornica podnosi i odwraca napięcie z \SI{10}{\V} do \SI{-12
 \end{figure}
 
 \subsection{Wybór elementów}
-\subsubsection{Wybór LT8362}
-Przetwornica obniżająca została wykonana w topologii SEPIC, ponieważ charakteryzują sie one mniejszymi tętnieniami napięcia wyjściowego niż przetwornice typu boost. Układ LT8362 został wybrany, ponieważ spełniał wymagania projektowe oraz był dostępny w dużych ilościach wśród dostawców. Dodatkowo, Analog Devices sugeruje go jako jeden z układów do wykorzystania przy nowych projektach.
-
-\subsubsection{Dobór cewki}
-Cewka została dobrana zgodnie ze wzorami dostępnym w nocie katalogowej, jednocześnie sugerując się przykładowym układem producenta. W układzie znalazła się cewka o wartości \SI{4.7}{\micro\henry}.
-
-\subsubsection{Dobór kondensatorów}
-Kondensatory zostały dobrane zgodnie z zaleceniami producenta układu, jednocześnie biorąc pod uwagę spadek pojemności. Wszystkie użyte kondensatory to kondensatory MLCC. Dokładna lista elementów znajduje się w pliku BOM.
-
-\subsection{Filtr}
-Na wyjściu układu umieszczony został filtr LP w topologii \Pi. Jego zadaniem jest usunięcie składowych wysoko-częstotliwościowych z napięcia wyjściowego, co przekłada się na zmniejszenie tętnień. W celu minimalizacji kosztów wykorzystana została taka sama cewka, jak w sekcji cyfrowej, wybrane zostały również wykorzystane wcześniej kondensatory \SI{10}{\micro\farad}. Pozwoliło to na uzyskanie częstotliwości granicznej: $$f_c = \frac{1}{2\pi \cdot \sqrt{L \cdot C}} = \frac{1}{2\pi \cdot \sqrt{\SI{3.3}{\micro\henry} \cdot \SI{10}{\micro\farad}}} = \SI{27.7}{\kilo\hertz}$$
-W wyniku spadku pojemności kondensatorów rzeczywista częstotliwość graniczna wynosiłaby około $\SI{35}{\kilo\hertz}$. Jest to zmiana mająca pomijalny wpływ na działanie układu, jednakże w celu zbliżenia filtru do początkowo planowanego umieszczone zostały po dwa kondensatory na wejściu i wyjściu filtru. Dodanie kolejnego typu kondensatora byłoby zbędnym zwiększaniem kosztów produkcji układu.
+Ten układ jest analogiczny do poprzedniego, dlatego wykorzystano te same elementy. Wykorzystanie topologii SEPIC pozwoliło na użycie tych samych elementów, co w przypadku przetwornicy nieodwracającej.
+Jedyną rożnicą jest zamiana miejscami diody z cewką oraz przeprojektowanie dzielnika programującego napięcie wyjściowe. W tym przypadku został on zaprojektowany zgodnie ze wzorem $R_1 = R_2 \cdot \left(\frac{\lvert V_{OUT} \rvert}{\SI{0.8}{\V} - 1}\right)$
 
 \subsection{Wyniki symulacji}
 \begin{table}[H]
@@ -454,8 +450,11 @@ W wyniku spadku pojemności kondensatorów rzeczywista częstotliwość graniczn
     \end{tabular}
 \end{table}
 
-\newpage
-\section{Wnioski i podsumowanie}
+\subsection{Wnioski}
+Wykorzystanie przetwornicy SEPIC znacząco ułatwiło projektowanie układu. Wykorzystanie tych samych elementów ma zaletę ze względu na mniejsze koszty produkcji. Udało się uzyskać bardzo małe tętnienia napięcia wyjściowego, co jest kluczowe w przypadku zasilania analogowej sekcji układu. Problemem przy tej symulacji jest liczenie sprawności, która jest niefizyczna, ponieważ moc wyjściowa potrafi być większa niż wejściowa - byłem w tej kwestii na konsultacjach. Późniejsze testy wykazały, że spowodowane jest to modyfikacją parametru Trtol w LTSpice, który odpowiada za dokładność obliczeń. Niestety ustawienie domyślnej wartości nie pozwalało na ukończenie symulacji w rozsądnym czasie - jedna symulacja, z jedenastu potrzebnych do wykonania, trwała około 3 godzin.
 
+\section{Wnioski i podsumowanie}
+Projektowanie układów zasilających wymaga wyboru między sprawnością, a stabilnością napięcia wyjściowego. Wykorzystanie stabilizatorów liniowych pozwala na uzyskanie bardzo małych tętnień, ale jest to robione kosztem sprawności, która w przybliżeniu wynosi $\eta = \frac{V_{OUT}}{V_{IN}}$. W układach, które są mniej wrażliwe na tętnienia, jak np. układy cyfrowe, warto zastosować przetwornice impulsowe, których sprawności sięgają rzędu \SI{90}{\percent}.
+Podczas projektowania bardzo ważne okazuje się również uwzględnienie parametrów pasożytniczych, które mają bardzo duży wpływ na działanie układu. Przykładem może być tutaj przetwornica z sekcji cyfrowej, gdzie usunięcie kondensatora MLCC i pozostawienie jedynie kondensatora elektrolitycznego spowodowało podniesienie tętnień z kilkudziesięciu mV do kilkuset mV.
 
 \end{document}
