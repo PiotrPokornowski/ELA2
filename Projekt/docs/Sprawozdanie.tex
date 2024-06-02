@@ -1,7 +1,5 @@
 \documentclass[11pt]{article}
 \usepackage{graphicx} % Required for inserting images
-\usepackage{babel}[polish]
-%\usepackage{polski}
 \usepackage{float}
 \usepackage{adjustbox}
 \usepackage{subfig}
@@ -18,6 +16,7 @@
 \usepackage{xcolor,colortbl}
 \usepackage{titling}
 
+
 \pgfplotsset{compat=newest}
 \usepgfplotslibrary{external}
 \tikzexternalize[prefix=tikz/]
@@ -26,32 +25,6 @@
 \author{Piotr Pokornowski 325061}
 \date{\today}
 
-%\pgfplotstableread[col sep=semicolon]{figures/digital/output.csv}\digital
-
-\pgfplotsset{select coords between index/.style 2 args={
-            x filter/.code={
-                    \ifnum\coordindex<#1\def\pgfmathresult{}\fi
-                    \ifnum\coordindex>#2\def\pgfmathresult{}\fi
-                }
-        }}
-
-
-        \pgfplotsset{
-    tick scale binop/.code args={#1:#2}{%
-        \pgfkeysalso{/pgfplots/tick label style={/pgf/number format/fixed, /pgf/number format/fixed zerofill=true}}%
-        \pgfmathparse{#2*pow(10,#1)}%
-    },
-    xtick scale label/.style={
-        scaled x ticks=manual:#1,
-        xtick scale binop=#1,
-        xticklabel={$\pgfmathprintnumber{\tick}$}
-    },
-    ytick scale label/.style={
-        scaled y ticks=manual:#1,
-        ytick scale binop=#1,
-        yticklabel={$\pgfmathprintnumber{\tick}$ mA}
-    }
-}
 
 \begin{document}
 
@@ -330,7 +303,7 @@ Kondensatory zostały dobrane zgodnie z zaleceniami producenta układu, jednocze
 
 \subsection{Filtr}
 Na wyjściu układu umieszczony został filtr LP w topologii \Pi. Jego zadaniem jest usunięcie składowych wysoko-częstotliwościowych z napięcia wyjściowego, co przekłada się na zmniejszenie tętnień. W celu minimalizacji kosztów wykorzystana została taka sama cewka, jak w sekcji cyfrowej, wybrane zostały również wykorzystane wcześniej kondensatory \SI{10}{\micro\farad}. Pozwoliło to na uzyskanie częstotliwości granicznej: $$f_c = \frac{1}{2\pi \cdot \sqrt{L \cdot C}} = \frac{1}{2\pi \cdot \sqrt{\SI{3.3}{\micro\henry} \cdot \SI{10}{\micro\farad}}} = \SI{27.7}{\kilo\hertz}$$
-W wyniku spadku pojemności kondensatorów rzeczywista częstotliwość graniczna wynosiłaby około $\SI{35}{\kilo\hertz}$. Jest to zmiana mająca pomijalny wpływ na działanie układu, jednakże w celu zbliżenia filtru do początkowo planowanego umieszczone zostały po dwa kondensatory na wejściu i wyjściu filtru. Dodanie kolejnego typu kondensatora byłoby zbędnym zwiększaniem kosztów produkcji układu.
+W wyniku spadku pojemności kondensatorów rzeczywista częstotliwość graniczna wynosi około $\SI{35}{\kilo\hertz}$. Jest to zmiana mająca pomijalny wpływ na działanie układu, jednakże w celu zbliżenia filtru do początkowo planowanego umieszczone zostały po dwa kondensatory na wejściu i wyjściu filtru. Dodanie kolejnego typu kondensatora byłoby zbędnym zwiększaniem kosztów produkcji układu.
 
 \subsection{Wyniki symulacji}
 \begin{table}[H]
@@ -454,7 +427,8 @@ Jedyną rożnicą jest zamiana miejscami diody z cewką oraz przeprojektowanie d
 Wykorzystanie przetwornicy SEPIC znacząco ułatwiło projektowanie układu. Wykorzystanie tych samych elementów ma zaletę ze względu na mniejsze koszty produkcji. Udało się uzyskać bardzo małe tętnienia napięcia wyjściowego, co jest kluczowe w przypadku zasilania analogowej sekcji układu. Problemem przy tej symulacji jest liczenie sprawności, która jest niefizyczna, ponieważ moc wyjściowa potrafi być większa niż wejściowa - byłem w tej kwestii na konsultacjach. Późniejsze testy wykazały, że spowodowane jest to modyfikacją parametru Trtol w LTSpice, który odpowiada za dokładność obliczeń. Niestety ustawienie domyślnej wartości nie pozwalało na ukończenie symulacji w rozsądnym czasie - jedna symulacja, z jedenastu potrzebnych do wykonania, trwała około 3 godzin.
 
 \section{Wnioski i podsumowanie}
-Projektowanie układów zasilających wymaga wyboru między sprawnością, a stabilnością napięcia wyjściowego. Wykorzystanie stabilizatorów liniowych pozwala na uzyskanie bardzo małych tętnień, ale jest to robione kosztem sprawności, która w przybliżeniu wynosi $\eta = \frac{V_{OUT}}{V_{IN}}$. W układach, które są mniej wrażliwe na tętnienia, jak np. układy cyfrowe, warto zastosować przetwornice impulsowe, których sprawności sięgają rzędu \SI{90}{\percent}.
-Podczas projektowania bardzo ważne okazuje się również uwzględnienie parametrów pasożytniczych, które mają bardzo duży wpływ na działanie układu. Przykładem może być tutaj przetwornica z sekcji cyfrowej, gdzie usunięcie kondensatora MLCC i pozostawienie jedynie kondensatora elektrolitycznego spowodowało podniesienie tętnień z kilkudziesięciu mV do kilkuset mV.
+Projektowanie układów zasilających wymaga wyboru między sprawnością, a stabilnością napięcia wyjściowego. Wykorzystanie stabilizatorów liniowych pozwala na uzyskanie bardzo małych tętnień, ale jest to robione kosztem sprawności, która w przybliżeniu wynosi $\eta = \frac{V_{OUT}}{V_{IN}}$. W układach, które są mniej wrażliwe na tętnienia, jak np. układy cyfrowe, warto zastosować przetwornice impulsowe, których sprawności sięgają rzędu \SI{90}{\percent}.\\
+Podczas projektowania bardzo ważne okazuje się również uwzględnienie parametrów pasożytniczych, które mają bardzo duży wpływ na działanie układu. Przykładem może być tutaj przetwornica z sekcji cyfrowej, gdzie usunięcie kondensatora MLCC i pozostawienie jedynie kondensatora elektrolitycznego spowodowało podniesienie tętnień z kilkudziesięciu mV do kilkuset mV.\\
+Dokładna lista wszystkich elementów znajduje się w dołączonym do projektu pliku BOM.
 
 \end{document}
